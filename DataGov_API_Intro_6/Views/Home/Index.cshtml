@@ -1,0 +1,18 @@
+﻿
+@model ICollection<DataGov_API_Intro_6.Models.Food>
+
+
+@{ ViewData["Title"] = "Index"; }
+
+<h2>Index</h2>
+
+@foreach (DataGov_API_Intro_6.Models.Food food in Model)
+{
+    @foreach (DataGov_API_Intro_6.Models.FoodNutrients nutri in food.foodNutrients)
+    {
+        @(food.fdcId+""+nutri.number+""+nutri.name+""+nutri.amount+""+nutri.unitName)
+        <br/>
+      
+    }
+
+}
