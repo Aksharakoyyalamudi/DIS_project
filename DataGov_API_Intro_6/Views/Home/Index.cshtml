@@ -3,16 +3,31 @@
 
 
 @{ ViewData["Title"] = "Index"; }
+@*
+<script type="application/json">
+    $(document).ready(function(){
+        debugger;
+    function ViewNutrients(id){
+         console.log(id);
+     } 
+    });
+      
+</script>*@
 
 <h2>Index</h2>
 
+<p>Add Food</p>
+
 @foreach (DataGov_API_Intro_6.Models.Food food in Model)
 {
-    @foreach (DataGov_API_Intro_6.Models.FoodNutrients nutri in food.foodNutrients)
+    @(food.foodCode + " "+ food.description) @Html.ActionLink("nutrient details", "FoodNutrients", "Home", new { fdcId = food.fdcId } ) <br />
+    <p>Edit</p>
+    <p>Delete</p>
+   @* @foreach (DataGov_API_Intro_6.Models.FoodNutrients nutri in food.foodNutrients)
     {
         @(food.fdcId+""+nutri.number+""+nutri.name+""+nutri.amount+""+nutri.unitName)
         <br/>
       
-    }
+    }*@
 
 }

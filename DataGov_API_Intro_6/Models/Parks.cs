@@ -20,7 +20,7 @@ namespace DataGov_API_Intro_6.Models
     public class Food
     {
         [Key]
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public String? fdcId { get; set; }
         public string? description { get; set; }
         public ICollection<FoodNutrients> foodNutrients { get; set; }
