@@ -1,0 +1,105 @@
+﻿@model DataGov_API_Intro_6.Models.Food;
+@*@model DataGov_API_Intro_6.ViewModel.FoodViewModel;*@
+
+@{
+    ViewBag.Title = "Add food";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-3 col-sm-6">
+            <h4 align="center">Create</h4>
+            @using (Html.BeginForm("Create", "home", FormMethod.Post))
+            {
+                <div>
+                    <h4>Food Details</h4>
+                </div>
+                @*<div class="form-group">
+                    @Html.LabelFor(m => Model.food.fdcId)
+                    <!--label>Commodity</label-->
+                    @Html.TextBoxFor(m => Model.food.fdcId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.food.fdcId)
+
+                </div>
+               <div class="form-group">
+                    @Html.LabelFor(m => Model.food.description)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => Model.food.description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.food.description)
+
+                </div>*@
+                
+                    <div class="form-group">
+                    @Html.LabelFor(m => m.fdcId)
+                    <!--label>Commodity</label-->
+                    @Html.TextBoxFor(m => m.fdcId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fdcId)
+
+                </div>
+               <div class="form-group">
+                    @Html.LabelFor(m => m.description)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => m.description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.description)
+
+                </div>
+                
+                
+                
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.foodCode)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => Model.foodCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.foodCode)
+
+                </div>
+                <div>
+                    <h4>Nutrient Details</h4>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.foodNutrients.FirstOrDefault().name)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => m.foodNutrients.FirstOrDefault().name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().name)
+
+                </div>
+                
+                
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().number)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().number, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().number)
+
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().amount)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().amount, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().amount)
+
+                </div>
+                
+                
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().unitName)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().unitName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().unitName)
+
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            }
+            </div>
+    </div>
+    
+</div>
+<br />
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2021 - AgriculturalStatistics - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>

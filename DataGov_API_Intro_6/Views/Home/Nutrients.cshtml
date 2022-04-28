@@ -1,0 +1,18 @@
+﻿
+@model ICollection<DataGov_API_Intro_6.Models.Food>
+
+
+@{ ViewData["Title"] = "Nutrients"; }
+
+
+<h2>Index</h2>
+
+<p>Add Food</p>
+
+@foreach (DataGov_API_Intro_6.Models.Food food in Model)
+{
+    @(food.foodCode + " "+ food.description) @Html.ActionLink("nutrient details", "FoodNutrients", "Home", new { fdcId = food.fdcId } ) <br />
+    <p>Edit</p>
+    <p>Delete</p>
+
+}

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using DataGov_API_Intro_6.ViewModel;
 
 namespace DataGov_API_Intro_6.Controllers
 {
@@ -105,17 +106,42 @@ namespace DataGov_API_Intro_6.Controllers
             return View();
         }
 
-        public IActionResult FoodNutrients(String fdcId)
+        /*public IActionResult Nutrients(String fdcId)
         {
             Console.WriteLine(fdcId);
             var fdnutreints = dbContext.Tfood.Include(p => p.foodNutrients).Where(k=>k.fdcId == fdcId).ToList();
             //ViewData["FoodNutrients"] = fdnutreints;
             return View(fdnutreints);
+        }*/
+
+        public IActionResult WholeNutirnts(String fdcId="1104086")
+        {
+            Console.WriteLine(fdcId);
+            var fdnutreints = dbContext.Tfood.Include(p => p.foodNutrients).Where(k => k.fdcId == fdcId).ToList();
+            //ViewData["FoodNutrients"] = fdnutreints;
+            return View(fdnutreints);
         }
 
-        [HttpPost]
+        public IActionResult Createnewpage()
+        {
+            /*FoodNutrients f = new FoodNutrients { };*/
+            ICollection<FoodNutrients> f2 = new System.Collections.ObjectModel.Collection<FoodNutrients>();
+
+            return View(new Food { foodNutrients = f2 });
+
+            /*var nuts = dbContext.Tfnd.ToList();
+            var v = new FoodViewModel()
+            {
+                food = new Food(),
+                foodNutrients = nuts
+            };
+            return Createnewpage(v);*/
+        }
+
+
+            [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(int foodId)
+        public IActionResult Create(Food food)
         {
             try
             {
@@ -141,10 +167,11 @@ namespace DataGov_API_Intro_6.Controllers
 
 
                 }*/
-                //dbContext.Tfood.Add(model);
-                //dbContext.SaveChanges();
+                dbContext.Tfood.Add(food);
+                /*dbContext.Tfnd.Add(view.foodNutrients);*/
+                dbContext.SaveChanges();
 
-                return View("Create"); 
+                return View(food); 
 
             }
             catch (DbUpdateException)

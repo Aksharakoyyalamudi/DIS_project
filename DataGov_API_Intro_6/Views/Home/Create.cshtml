@@ -1,0 +1,83 @@
+﻿
+@model DataGov_API_Intro_6.ViewModel.FoodViewModel;
+
+
+@{
+    ViewBag.Title = "Create Commodity";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-3 col-sm-6">
+            <h4 align="center">Create</h4>
+            @using (Html.BeginForm("Create", "home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.food.fdcId)
+                    <!--label>Commodity</label-->
+                    @Html.TextBoxFor(m => m.food.fdcId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.food.fdcId)
+
+                </div>
+               @* <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.DataItem)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => m.Commodity.DataItem, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.DataItem)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.CV)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => m.Commodity.CV, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.CV)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.Geography)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => m.Commodity.Geography, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.Geography)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.Domain)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => m.Commodity.Domain, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.Domain)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.Value)
+                    <!--label>CV</label-->
+                    @Html.TextBoxFor(m => m.Commodity.Value, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.Value)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.Group.GroupName)
+                    <!--label>Group</label-->
+                    @Html.DropDownListFor(m => m.Commodity.Group.GroupName, new SelectList(Model.GroupList, "GroupName", "GroupName"), "Select Group", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.Group.GroupName)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Commodity.Sector.SectorName)
+                    <!--label>Sector</label-->
+                    @Html.DropDownListFor(m => m.Commodity.Sector.SectorName, new SelectList(Model.SectorList, "SectorName", "SectorName"), "Select Sector", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Commodity.Sector.SectorName)
+
+                </div>*@
+                <button type="submit" class="btn btn-primary">Save</button>
+            }
+            </div>
+    </div>
+    
+</div>
+<br />
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2021 - AgriculturalStatistics - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+
