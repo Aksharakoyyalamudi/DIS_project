@@ -115,10 +115,11 @@ namespace DataGov_API_Intro_6.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(int foodId)
+        public IActionResult Create(Food model)
         {
             try
             {
+
                 /*if (ModelState.IsValid)
                 {
 
@@ -141,10 +142,19 @@ namespace DataGov_API_Intro_6.Controllers
 
 
                 }*/
-                //dbContext.Tfood.Add(model);
-                //dbContext.SaveChanges();
+                dbContext.Tfood.Add(model);
+                dbContext.SaveChanges();
 
-                return View("Create"); 
+                return View("Foods");
+
+               /* var viewModel = new Food
+                {
+                    
+                };
+
+                return View("Create", viewModel);*/
+
+
 
             }
             catch (DbUpdateException)
