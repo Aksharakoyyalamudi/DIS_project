@@ -34,6 +34,11 @@ namespace DataGov_API_Intro_6.Controllers
 
         public async Task<IActionResult> Index()
         {
+            return View();
+        }
+            public async Task<IActionResult> Food()
+        {
+            /*ICollection<Food> m = null;*/
             List<Food> m = null;
 
             if (dbContext.Tmain.Any())
@@ -41,7 +46,8 @@ namespace DataGov_API_Intro_6.Controllers
                // m = dbContext.Tfood.Include(p=>p.foodNutrients).ToArray();
                 m = dbContext.Tfood.Include(p=>p.foodNutrients).ToList();
             }
-            else {
+            else
+            {
                 httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Add("X-Api-Key", API_KEY);
@@ -96,7 +102,7 @@ namespace DataGov_API_Intro_6.Controllers
                     Console.WriteLine(e.Message);
                 }
             }
-            
+
             return View(m);
 
 
@@ -127,61 +133,32 @@ namespace DataGov_API_Intro_6.Controllers
 
         public IActionResult Createnewpage(string fdcid)
         {
-            /*FoodNutrients f = new FoodNutrients { };*/
-            List<FoodNutrients> f2 = new System.Collections.ObjectModel.Collection<FoodNutrients>().ToList();
-            var foodNutrients = new FoodNutrients();
-            //foodNutrients.unitName = "text";
-            f2.Add(foodNutrients);
-            return View(new Food { foodNutrients = f2 });
-            /*if (fdcId.Any())
-                return View(Createnewpage,fdcId);
-            else
-              return View();*/
+            /*FoodNutrients f = new FoodNutrients { };
+            ICollection<FoodNutrients> f2 = new System.Collections.ObjectModel.Collection<FoodNutrients>();
 
-            var fdcID = dbContext.Tfood.SingleOrDefault(c => c.fdcId == fdcid);
-            var food_details = dbContext.Tfood.Include(n => n.foodNutrients).Where(c => c.fdcId == fdcid).
-                Select(s => new
+            return View(new Food { foodNutrients = f2 });*/
+            Console.WriteLine(fdcId);
+            return View();
+
+            /*var nuts = dbContext.Tfnd.ToList();
+            var v = new FoodViewModel()
             {
-                description = s.description,
-                foodCode = s.foodCode,
-                number = s.
-
-                
-
-            }); '' ;
-
-                .ToList();
-
-            ToList();
-            var nutrients = dbContext.Tfnd.ToList();
-            if (fdcid == null)
-                return NotFound();
-            else
-            {
-
-                var viewmodel = new FoodViewModel()
-                {
-                
-
-
-
+                food = new Food(),
+                foodNutrients = nuts
             };
-                return View(viewmodel);
-
-                /*var nuts = dbContext.Tfnd.ToList();
-                var v = new FoodViewModel()
-                {
-                    food = new Food(),
-                    foodNutrients = nuts
-                };
-                return Createnewpage(v);*/
-            }
+            return Createnewpage(v);*/
+        }
 
 
             [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Food food)
+        public IActionResult Create(FoodViewModel view)
         {
+            /*DataGov_API_Intro_6.Models.Food f = new DataGov_API_Intro_6.Models.Food();*/
+            List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
+            //List<Food> selectedCollection2 =new List<Food>();
+
+
             try
             {
 
@@ -207,11 +184,32 @@ namespace DataGov_API_Intro_6.Controllers
 
 
                 }*/
-                dbContext.Tfood.Add(food);
-                /*dbContext.Tfnd.Add(view.foodNutrients);*/
+                Console.WriteLine(view);
+
+                var fn = new DataGov_API_Intro_6.Models.FoodNutrients
+                {
+                    number = view.number,
+                    name = view.name,
+                    amount = view.amount,
+                    unitName = view.unitName
+
+                };
+                List<DataGov_API_Intro_6.Models.FoodNutrients> selectedCollection = new List<DataGov_API_Intro_6.Models.FoodNutrients> { fn };
+                var f = new Food
+                {
+                    fdcId = view.fdcId,
+                    description = view.description,
+                    foodCode = view.foodCode,
+                    foodNutrients = selectedCollection
+                };
+                
+                Console.WriteLine(f);
+                selectedCollection2.Add(f);
+                dbContext.Tfood.Add(f);
                 dbContext.SaveChanges();
 
-                return View(food); 
+                /*return View(); */
+               // return View("Index", f);
 
             }
             catch (DbUpdateException)
@@ -219,17 +217,20 @@ namespace DataGov_API_Intro_6.Controllers
                 ModelState.AddModelError("", "Error Occured");
             }
 
-            return View();
+            return View("Index", selectedCollection2);
         }
 
-        public IActionResult Delete(string fdcID="1104086")
+        public IActionResult Delete(Food f)
         {
 
-            var Commodity = dbContext.Tfood.Include(p => p.foodNutrients).Where(m => m.fdcId == fdcID).SingleOrDefault();
-                //_context.Commodities.Include(c => c.Group).SingleOrDefault(c => c.CommodityID == id);
+            var Commodity = dbContext.Tfood.Where(m => m.fdcId == f.fdcId).Include(c => c.foodNutrients).SingleOrDefault();
+            /*var Commodity = dbContext.Tfood.Include(c => c.foodNutrients).SingleOrDefault(c => c.fdcId == f.fdcId);*/
+            
+            //_context.Commodities.Include(c => c.Group).SingleOrDefault(c => c.CommodityID == id);
             dbContext.Tfood.Remove(Commodity);
+            List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
             dbContext.SaveChanges();
-            return View();
+            return View("Food", selectedCollection2);
         }
 
     }

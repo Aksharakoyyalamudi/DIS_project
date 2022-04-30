@@ -47,7 +47,7 @@ namespace DataGov_API_Intro_6.Models
         public String? name { get; set; }
         public float? amount { get; set; }
         public string? unitName { get; set; }
-       
+         /*public Food food { get; set; }*/
     }
 
     public class Park

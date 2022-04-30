@@ -1,5 +1,5 @@
-﻿@model DataGov_API_Intro_6.Models.Food;
-@*@model DataGov_API_Intro_6.ViewModel.FoodViewModel;*@
+﻿@*@model DataGov_API_Intro_6.Models.Food;*@
+@model DataGov_API_Intro_6.ViewModel.FoodViewModel;
 
 @{
     ViewBag.Title = "Add food";
@@ -58,7 +58,36 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().name)
+                    @Html.LabelFor(m => m.name)
+                    <!--label>Commodity</label-->
+                    @Html.TextBoxFor(m => m.name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.name)
+
+                </div>
+               <div class="form-group">
+                    @Html.LabelFor(m => m.number)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => m.number, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.number)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.amount)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => m.amount, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.amount)
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.unitName)
+                    <!--label>DataItem</label-->
+                    @Html.TextBoxFor(m => m.unitName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.unitName)
+
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(m => m.foodNutrients.FirstOrDefault().name)
                     <!--label>CV</label-->
                     @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().name, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().name)
@@ -94,23 +123,9 @@
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().unitName)
 
                 </div>*@
-
-                for (var i = 0; i < 1; i++) {
-        @*@Html.HiddenFor(m => m.foodNutrients.FirstOrDefault().unitName)*@
-        @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().unitName)
-        @Html.DisplayName(@Model.foodNutrients.FirstOrDefault().unitName) <br/>
-        @Html.TextBoxFor(m => m.foodNutrients.FirstOrDefault().unitName)<br />
-        @Html.HiddenFor(m => Model.foodNutrients[i].unitName)<br />
-    }
                 <button type="submit" class="btn btn-primary">Save</button>
             }
             </div>
     </div>
     
 </div>
-<br />
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2021 - AgriculturalStatistics - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>
-</footer>
