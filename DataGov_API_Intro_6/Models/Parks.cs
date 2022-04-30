@@ -23,7 +23,7 @@ namespace DataGov_API_Intro_6.Models
         //public Guid Id { get; set; }
         public String? fdcId { get; set; }
         public string? description { get; set; }
-        public ICollection<FoodNutrients> foodNutrients { get; set; }
+        public List<FoodNutrients> foodNutrients { get; set; }
         public string? foodCode { get; set; }
     }
 
@@ -32,7 +32,7 @@ namespace DataGov_API_Intro_6.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public ICollection<Food> food { get; set; }
+        public List<Food> food { get; set; }
 
         public DateTime date { get; set; }
     }
@@ -45,7 +45,7 @@ namespace DataGov_API_Intro_6.Models
         public String? name { get; set; }
         public float? amount { get; set; }
         public string? unitName { get; set; }
-       
+         /*public Food food { get; set; }*/
     }
 
     public class Park
