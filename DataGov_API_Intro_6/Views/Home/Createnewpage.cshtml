@@ -58,10 +58,11 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.foodNutrients.FirstOrDefault().name)
+                    @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().name)
                     <!--label>CV</label-->
-                    @Html.TextBoxFor(m => m.foodNutrients.FirstOrDefault().name, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().name, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().name)
+                     @Html.HiddenFor(m => Model.foodNutrients.FirstOrDefault().name)
 
                 </div>
                 
@@ -72,6 +73,7 @@
                     <!--label>CV</label-->
                     @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().number, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().number)
+                     @Html.HiddenFor(m => Model.foodNutrients.FirstOrDefault().number)
 
                 </div>
                 
@@ -80,17 +82,26 @@
                     <!--label>CV</label-->
                     @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().amount, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().amount)
+                    @Html.HiddenFor(m => Model.foodNutrients.FirstOrDefault().amount)
 
                 </div>
                 
                 
-                <div class="form-group">
+               @* <div class="form-group">
                     @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().unitName)
                     <!--label>CV</label-->
                     @Html.TextBoxFor(m => Model.foodNutrients.FirstOrDefault().unitName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => Model.foodNutrients.FirstOrDefault().unitName)
 
-                </div>
+                </div>*@
+
+                for (var i = 0; i < 1; i++) {
+        @*@Html.HiddenFor(m => m.foodNutrients.FirstOrDefault().unitName)*@
+        @Html.LabelFor(m => Model.foodNutrients.FirstOrDefault().unitName)
+        @Html.DisplayName(@Model.foodNutrients.FirstOrDefault().unitName) <br/>
+        @Html.TextBoxFor(m => m.foodNutrients.FirstOrDefault().unitName)<br />
+        @Html.HiddenFor(m => Model.foodNutrients[i].unitName)<br />
+    }
                 <button type="submit" class="btn btn-primary">Save</button>
             }
             </div>

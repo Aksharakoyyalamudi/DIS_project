@@ -34,11 +34,12 @@ namespace DataGov_API_Intro_6.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ICollection<Food> m = null;
+            List<Food> m = null;
 
             if (dbContext.Tmain.Any())
             {
-                m = dbContext.Tfood.Include(p=>p.foodNutrients).ToArray();
+               // m = dbContext.Tfood.Include(p=>p.foodNutrients).ToArray();
+                m = dbContext.Tfood.Include(p=>p.foodNutrients).ToList();
             }
             else {
                 httpClient = new HttpClient();
@@ -78,7 +79,9 @@ namespace DataGov_API_Intro_6.Controllers
                     {
                         // JsonConvert is part of the NewtonSoft.Json Nuget package
 
-                        m = JsonConvert.DeserializeObject<Food[]>(parksData);
+                        
+                        m = JsonConvert.DeserializeObject<Food[]>(parksData).Where(i => !string.IsNullOrEmpty(i.fdcId) && !string.IsNullOrEmpty(i.description) && !string.IsNullOrEmpty(i.foodCode))
+                        .ToList();
                         //parks = JsonConvert.DeserializeObject<Parks>(parksData);
                     }
 
@@ -122,21 +125,57 @@ namespace DataGov_API_Intro_6.Controllers
             return View(fdnutreints);
         }
 
-        public IActionResult Createnewpage()
+        public IActionResult Createnewpage(string fdcid)
         {
             /*FoodNutrients f = new FoodNutrients { };*/
-            ICollection<FoodNutrients> f2 = new System.Collections.ObjectModel.Collection<FoodNutrients>();
-
+            List<FoodNutrients> f2 = new System.Collections.ObjectModel.Collection<FoodNutrients>().ToList();
+            var foodNutrients = new FoodNutrients();
+            //foodNutrients.unitName = "text";
+            f2.Add(foodNutrients);
             return View(new Food { foodNutrients = f2 });
+            /*if (fdcId.Any())
+                return View(Createnewpage,fdcId);
+            else
+              return View();*/
 
-            /*var nuts = dbContext.Tfnd.ToList();
-            var v = new FoodViewModel()
+            var fdcID = dbContext.Tfood.SingleOrDefault(c => c.fdcId == fdcid);
+            var food_details = dbContext.Tfood.Include(n => n.foodNutrients).Where(c => c.fdcId == fdcid).
+                Select(s => new
             {
-                food = new Food(),
-                foodNutrients = nuts
+                description = s.description,
+                foodCode = s.foodCode,
+                number = s.
+
+                
+
+            }); '' ;
+
+                .ToList();
+
+            ToList();
+            var nutrients = dbContext.Tfnd.ToList();
+            if (fdcid == null)
+                return NotFound();
+            else
+            {
+
+                var viewmodel = new FoodViewModel()
+                {
+                
+
+
+
             };
-            return Createnewpage(v);*/
-        }
+                return View(viewmodel);
+
+                /*var nuts = dbContext.Tfnd.ToList();
+                var v = new FoodViewModel()
+                {
+                    food = new Food(),
+                    foodNutrients = nuts
+                };
+                return Createnewpage(v);*/
+            }
 
 
             [HttpPost]
