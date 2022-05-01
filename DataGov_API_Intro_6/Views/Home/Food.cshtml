@@ -6,13 +6,15 @@
 
 @{ ViewData["Title"] = "WholeNutirnts"; }
 
-
-<h2>Food Details</h2>
+<body style="background-color:#9cff0721">
+    @*url('/js/Project Theme.png');*@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6">
-            <button class="btn btn-primary" style="float:right">
+        <div class="col-sm-12">
+            <h2>Food Details</h2>
+
+            <button class="btn" style="float:right;color:#fff ">
                 @Html.ActionLink("Create New", "Createnewpage")
             </button>
         </div>
@@ -28,8 +30,8 @@
 
 }*@
 
-<table id="dairy" class="table table-bordered">
-                <caption style="color: white;">Dairy sales Statistics report</caption>
+<table class="table table-bordered">
+                
                 <thead>
                     <tr>
 
@@ -58,7 +60,7 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Createnewpage", "Home", new { fdcId = food.fdcId })
-                                @Html.ActionLink("Delete", "Delete", "Home", new { fdcId = food.fdcId } )
+                                @Html.ActionLink("Delete", "Delete", "Home", new { fdcId = food.fdcId },new { onclick = "return confirm('Are sure wants to delete?');" } )
                             </td>
                   
                         </tr>
@@ -70,3 +72,4 @@
 
                 </tbody>
             </table>
+            </body>

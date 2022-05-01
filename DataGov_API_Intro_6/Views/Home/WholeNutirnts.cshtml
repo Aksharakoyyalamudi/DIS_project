@@ -6,9 +6,16 @@
 
 @{ ViewData["Title"] = "WholeNutirnts"; }
 
+<body style="background-color:#9cff0721">
 
 <h2>Whole Nutrients</h2>
 
+<br />
+<div>
+<p>Food nutrient details of @Model.FirstOrDefault().description</p>
+<div align="right">@Html.ActionLink("Back to Food Details", "Food", "Home")</div>
+<br />
+		</div>
 
 @*@foreach (DataGov_API_Intro_6.Models.Food food in Model)
 {
@@ -18,8 +25,8 @@
 
 }*@
 
-<table id="dairy" class="table table-bordered">
-                <caption style="color: white;">Dairy sales Statistics report</caption>
+<table class="table table-bordered">
+                
                 <thead>
                     <tr>
 
@@ -54,3 +61,4 @@
 
                 </tbody>
             </table>
+            </body>

@@ -1,0 +1,51 @@
+﻿@model List<DataGov_API_Intro_6.ViewModel.sample>
+<div class="container">
+    <canvas id="bar-chart"></canvas>
+</div>
+
+<script>
+   
+        
+        new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: getdata(),
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Nutrition values for Foods with FoodId on X and nutrient details on Y axis'
+                }
+            }
+        });
+         function getdata(){
+            console.log("incomeing")
+            data1=[];
+            labels1=[];
+            @foreach(var d in Model)
+            {
+                @:data1.push(@d.quantity)
+                @:labels1.push(@d.desc)
+                
+            }
+            
+             
+            
+            
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+            //alert(data1)
+            ob={labels:labels1,datasets:[{backgroundColor:getRandomColor(),data:data1}]}
+            //alert(ob)
+            return ob
+        }
+
+</script>
+
+
+

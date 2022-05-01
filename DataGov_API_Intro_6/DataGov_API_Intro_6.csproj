@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Images\Akshara.jpeg" />
+    <Content Remove="wwwroot\Images\vegetables.jpg" />
+    <Content Remove="wwwroot\js\Akshara.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\Akshara.jpeg" />
+    <None Include="wwwroot\Images\vegetables.jpg" />
+    <None Include="wwwroot\js\Akshara.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.4" />
