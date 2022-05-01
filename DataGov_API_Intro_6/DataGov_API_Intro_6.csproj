@@ -9,13 +9,11 @@
   <ItemGroup>
     <Content Remove="wwwroot\Images\Akshara.jpeg" />
     <Content Remove="wwwroot\Images\vegetables.jpg" />
-    <Content Remove="wwwroot\js\Akshara.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\Images\Akshara.jpeg" />
     <None Include="wwwroot\Images\vegetables.jpg" />
-    <None Include="wwwroot\js\Akshara.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
