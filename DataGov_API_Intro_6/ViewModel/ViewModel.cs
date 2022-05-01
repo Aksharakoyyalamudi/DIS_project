@@ -21,5 +21,10 @@ namespace DataGov_API_Intro_6.ViewModel
                 public IEnumerable<Sector> SectorList { get; set; }*/
     }
 
+    public class sample
+    {
+        public int desc { get; set; }
+        public int quantity { get; set; }
+    }
     
 }

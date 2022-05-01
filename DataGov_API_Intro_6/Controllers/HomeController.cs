@@ -105,9 +105,15 @@ namespace DataGov_API_Intro_6.Controllers
             return View(fdnutreints);
         }*/
 
-        public IActionResult WholeNutirnts(String fdcId="1104086")
+        public IActionResult WholeNutirnts(String fdcId="")
         {
             Console.WriteLine(fdcId);
+            if(fdcId == "")
+            {
+                List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
+                fdcId = selectedCollection2[0].fdcId;
+            }
+            
             var fdnutreints = dbContext.Tfood.Include(p => p.foodNutrients).Where(k => k.fdcId == fdcId).ToList();
             //ViewData["FoodNutrients"] = fdnutreints;
             return View(fdnutreints);
@@ -158,35 +164,7 @@ namespace DataGov_API_Intro_6.Controllers
         }
 
         [HttpGet]
-        /* public IActionResult Edit(string fdcID)
-         {
-             var foodDetails = dbContext.Tfood.Include(n => n.foodNutrients).Where(s => s.fdcId == fdcID).FirstOrDefault();
-             //var foodnutr = dbContext.Tfnd.ToList();
-             if (foodDetails == null)
-                 return NotFound();
-             else
-             {
-                 var foodnut = foodDetails.foodNutrients.FirstOrDefault();
-                 var viewmodel = new FoodViewModel()
-                 {
-                     fdcId = foodDetails.fdcId,
-                     description = foodDetails.description,
-                     foodCode = foodDetails.foodCode,
-                     number = foodnut.number,
-                     name = foodnut.name,
-                     number = foodDetails.foodNutrients.FirstOrDefault().number,
-                     number = foodDetails.foodNutrients.FirstOrDefault().number,
-
-
-
-
-                 };
-                 return View(viewmodel);
-             }
-
-
-         }*/
-
+        
         public void Refresh()
         {
             (dbContext as DbContext).Database.CloseConnection();
@@ -203,6 +181,8 @@ namespace DataGov_API_Intro_6.Controllers
             var foodDetails = dbContext.Tfood.Include(n => n.foodNutrients).AsNoTracking().Where(s => s.fdcId == view.fdcId).FirstOrDefault();
             try
             {
+
+                
                 Console.WriteLine(view);
                 var fn = new DataGov_API_Intro_6.Models.FoodNutrients
                 {
@@ -264,20 +244,56 @@ namespace DataGov_API_Intro_6.Controllers
             
             //_context.Commodities.Include(c => c.Group).SingleOrDefault(c => c.CommodityID == id);
             dbContext.Tfood.Remove(Commodity);
+            dbContext.SaveChanges();
             List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
             dbContext.SaveChanges();
             return View("Food", selectedCollection2);
         }
 
-        public ActionResult Search(String id = null)
-
+        public IActionResult aboutus()
+        {
+            
+            //ViewData["FoodNutrients"] = fdnutreints;
+            return View("aboutus");
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult statistics()
         {
 
-            var registration = dbContext.Tfood.Include(n=>n.foodNutrients).
-                Where(p => p.fdcId.Contains(id));
+            //ViewData["FoodNutrients"] = fdnutreints;
+            List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
+            /*Dictionary<string, int> openWith = new Dictionary<string, int>();*/
+            List<ViewModel.sample> sample = new List<ViewModel.sample>();
+            foreach (Food i in selectedCollection2)
+            {
+                ViewModel.sample sam = new ViewModel.sample();
+                if (i.fdcId == null)
+                {
+                    continue;
+                }
+                int s = 1;
+                foreach (FoodNutrients fn in i.foodNutrients)
+                {
+                    s = s + Convert.ToInt32(fn.amount);
+                }
 
-            return View("Food",Index);
+                sam.desc = Convert.ToInt32(i.fdcId);
+        
+                sam.quantity = s;
+                sample.Add(sam);
+                /*if (i.description.ToLower().Contains("bar"))
+                {
 
+                }*/
+                
+                
+            }
+            /*Console.WriteLine(openWith);
+            ViewData["nutdetails"] = openWith;*/
+            return View(sample);
         }
 
     }
