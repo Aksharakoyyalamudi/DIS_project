@@ -296,6 +296,12 @@ namespace DataGov_API_Intro_6.Controllers
             return View(sample);
         }
 
+        public ActionResult Search(String id = null)
+        {
+            var registration = dbContext.Tfood.Include(n => n.foodNutrients).
+            Where(p => p.fdcId.Contains(id));
+            return View("Food", Index);
+        }
     }
 }
 
