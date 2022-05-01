@@ -12,16 +12,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <h2>Food Details</h2>
-
-            <button class="btn" style="float:right;color:#fff ">
-                @Html.ActionLink("Create New", "Createnewpage")
-            </button>
+            <h2>Food Details</h2>       
         </div>
     </div>
 </div>
 
+<p>
 
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-sm-10">
+                <b>Food Description: </b> @Html.TextBox("desc")  <input type="submit" required="required" value="search" class="btn btn-success" role="button" data-toggle="tooltip" title="Search" />
+                @*@Html.TextBoxFor(food.description, new { @class = "form-control", placeholder = "fdcId", required="required"})*@
+            </div>
+            <div class="col-sm-2">              
+                    @Html.ActionLink("Create New", "Createnewpage")
+               
+            </div>
+            
+        </div>
+        <br />
+    }
+ </p>
 @*@foreach (DataGov_API_Intro_6.Models.Food food in Model)
 {
     @(food.foodCode + " "+ food.description) @Html.ActionLink("nutrient details", "FoodNutrients", "Home", new { fdcId = food.fdcId } ) <br />

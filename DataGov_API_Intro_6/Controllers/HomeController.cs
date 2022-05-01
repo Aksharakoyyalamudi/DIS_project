@@ -296,11 +296,11 @@ namespace DataGov_API_Intro_6.Controllers
             return View(sample);
         }
 
-        public ActionResult Search(String id = null)
+        public ActionResult Search(String desc)
         {
-            var registration = dbContext.Tfood.Include(n => n.foodNutrients).
-            Where(p => p.fdcId.Contains(id));
-            return View("Food", Index);
+            List<DataGov_API_Intro_6.Models.Food> fooddetailssearch = dbContext.Tfood.Include(n => n.foodNutrients).
+            Where(p => p.description.Contains(desc)).ToList();
+            return View("Food", fooddetailssearch);
         }
     }
 }
