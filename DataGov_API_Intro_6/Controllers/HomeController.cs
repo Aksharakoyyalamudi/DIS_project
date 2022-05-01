@@ -15,8 +15,6 @@ namespace DataGov_API_Intro_6.Controllers
     public class HomeController : Controller
     {
         HttpClient httpClient;
-
-        //static string BASE_URL = "https://developer.nps.gov/api/v1";
         static string BASE_URL = "https://api.nal.usda.gov/";
         
         static string API_KEY = "mdBybOievMdeX3eYSC0MhFu3U7xRV18xHAPG04qb"; //Add your API key here inside ""
@@ -56,9 +54,6 @@ namespace DataGov_API_Intro_6.Controllers
                 
                 string NATIONAL_PARK_API_PATH = BASE_URL + "fdc/v1/foods/list?";
                 string parksData = "";
-
-                Parks parks = null;
-
                 Food food = null;
 
                 
@@ -67,12 +62,8 @@ namespace DataGov_API_Intro_6.Controllers
 
                 try
                 {
-                    //HttpResponseMessage response = httpClient.GetAsync(NATIONAL_PARK_API_PATH)
-                    //                                        .GetAwaiter().GetResult();
                     HttpResponseMessage response = httpClient.GetAsync(NATIONAL_PARK_API_PATH)
                                                             .GetAwaiter().GetResult();
-
-
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -83,15 +74,10 @@ namespace DataGov_API_Intro_6.Controllers
                     if (!parksData.Equals(""))
                     {
                         // JsonConvert is part of the NewtonSoft.Json Nuget package
-
-                        
                         m = JsonConvert.DeserializeObject<Food[]>(parksData).Where(i => !string.IsNullOrEmpty(i.fdcId) && !string.IsNullOrEmpty(i.description) && !string.IsNullOrEmpty(i.foodCode))
                         .ToList();
-                        //parks = JsonConvert.DeserializeObject<Parks>(parksData);
+                    
                     }
-
-
-                    //dbContext.parks.Add(parks);
                     dbContext.Tmain.Add(new main() { food = m, date = DateTime.Now });
                     await dbContext.SaveChangesAsync();
                 }
@@ -101,10 +87,7 @@ namespace DataGov_API_Intro_6.Controllers
                     Console.WriteLine(e.Message);
                 }
             }
-
             return View(m);
-
-
         }
 
         public IActionResult Foods()
@@ -220,31 +203,7 @@ namespace DataGov_API_Intro_6.Controllers
             var foodDetails = dbContext.Tfood.Include(n => n.foodNutrients).AsNoTracking().Where(s => s.fdcId == view.fdcId).FirstOrDefault();
             try
             {
-
-                /*if (ModelState.IsValid)
-                {
-
-                    dbContext.Tfood.Add(model);
-                    dbContext.SaveChanges();
-                    return RedirectToAction("Foods", "Home");
-                }
-                
-                else
-                {
-
-                    var viewModel = new Food
-                    {
-                        Commodity = model.Commodity,
-                        GroupList = _context.Groups.ToList(),
-                        SectorList = _context.Sectors.ToList()
-                    };
-
-                    return View("Create", viewModel);
-
-
-                }*/
                 Console.WriteLine(view);
-
                 var fn = new DataGov_API_Intro_6.Models.FoodNutrients
                 {
                     number = view.number,
@@ -261,11 +220,8 @@ namespace DataGov_API_Intro_6.Controllers
                     foodCode = view.foodCode,
                     foodNutrients = selectedCollection
                 };
-
                 Console.WriteLine(f);
                 
-
-
                 if (foodDetails != null)
                 {
                     var Commodity = dbContext.Tfood.Where(m => m.fdcId == f.fdcId).Include(c => c.foodNutrients).SingleOrDefault();
@@ -289,9 +245,7 @@ namespace DataGov_API_Intro_6.Controllers
                 dbContext.SaveChanges();
 
                     /*return View(); */
-                    // return View("Index", f);
-
-                
+                    // return View("Index", f);             
             }
             catch (DbUpdateException)
             {
@@ -313,6 +267,17 @@ namespace DataGov_API_Intro_6.Controllers
             List<DataGov_API_Intro_6.Models.Food> selectedCollection2 = dbContext.Tfood.Include(f => f.foodNutrients).ToList();
             dbContext.SaveChanges();
             return View("Food", selectedCollection2);
+        }
+
+        public ActionResult Search(String id = null)
+
+        {
+
+            var registration = dbContext.Tfood.Include(n=>n.foodNutrients).
+                Where(p => p.fdcId.Contains(id));
+
+            return View("Food",Index);
+
         }
 
     }
