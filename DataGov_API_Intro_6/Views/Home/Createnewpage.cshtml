@@ -32,14 +32,16 @@
                     <div class="form-group">
                     @Html.LabelFor(m => m.fdcId)
                     <!--label>Commodity</label-->
-                    @Html.TextBoxFor(m => m.fdcId, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.fdcId, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.fdcId, new { @class = "form-control", placeholder = "fdcId", required="required"})
                     @Html.ValidationMessageFor(m => m.fdcId)
 
                 </div>
                <div class="form-group">
                     @Html.LabelFor(m => m.description)
                     <!--label>DataItem</label-->
-                    @Html.TextBoxFor(m => m.description, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.description, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.description, new { @class = "form-control", placeholder = "description", required="required"})
                     @Html.ValidationMessageFor(m => m.description)
 
                 </div>
@@ -49,7 +51,8 @@
                 <div class="form-group">
                     @Html.LabelFor(m => Model.foodCode)
                     <!--label>CV</label-->
-                    @Html.TextBoxFor(m => Model.foodCode, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => Model.foodCode, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.foodCode, new { @class = "form-control", placeholder = "foodCode", required="required"})
                     @Html.ValidationMessageFor(m => Model.foodCode)
 
                 </div>
@@ -60,28 +63,32 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.name)
                     <!--label>Commodity</label-->
-                    @Html.TextBoxFor(m => m.name, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.name, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.name, new { @class = "form-control", placeholder = "NutrientName", required="required"})
                     @Html.ValidationMessageFor(m => m.name)
 
                 </div>
                <div class="form-group">
                     @Html.LabelFor(m => m.number)
                     <!--label>DataItem</label-->
-                    @Html.TextBoxFor(m => m.number, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.number, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.number, new { @class = "form-control", placeholder = "NutrientNumber", required="required"})
                     @Html.ValidationMessageFor(m => m.number)
 
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.amount)
                     <!--label>DataItem</label-->
-                    @Html.TextBoxFor(m => m.amount, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.amount, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.amount, new { @class = "form-control", placeholder = "NutritionAmount", required="required"})
                     @Html.ValidationMessageFor(m => m.amount)
 
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.unitName)
                     <!--label>DataItem</label-->
-                    @Html.TextBoxFor(m => m.unitName, new { @class = "form-control" })
+                    @*@Html.TextBoxFor(m => m.unitName, new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.unitName, new { @class = "form-control", placeholder = "NutrientUnitName", required="required"})
                     @Html.ValidationMessageFor(m => m.unitName)
 
                 </div>
